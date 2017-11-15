@@ -3,7 +3,7 @@ var write = require('./write'),
     prj = require('./prj'),
     JSZip = require('jszip');
 
-module.exports = function(gj, options) {
+module.exports = function(gj, options, type) {
 
     var zip = new JSZip(),
         layers = zip.folder(options && options.folder ? options.folder : 'layers');
@@ -29,6 +29,9 @@ module.exports = function(gj, options) {
     });
 
     var generateOptions = { compression:'STORE' };
+    if(type){
+      generateOptions.type = type
+    }
 
     if (!process.browser) {
       generateOptions.type = 'nodebuffer';
